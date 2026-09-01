@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ลงทะเบียนการสำรวจนอกกำแพง | Wall Maria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16261E;
+    --parchment:#EFE6D0;
+    --parchment-deep:#E4D8B8;
+    --panel:#FAF6E9;
+    --jungle:#1E3B2C;
+    --jungle-deep:#12241A;
+    --brass:#A6741B;
+    --brass-light:#C79A3E;
+    --rust:#8B3A3A;
+    --line:#D6C79E;
+    --ok:#3E6B4F;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(166,116,27,0.06), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(30,59,44,0.05), transparent 45%);
+    font-family:'Sarabun', sans-serif;
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  .topbar{
+    background:var(--jungle-deep);
+    color:var(--parchment);
+    padding:18px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:3px solid var(--brass);
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;}
+  .brand-mark{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--brass-light);
+    letter-spacing:0.02em;
+  }
+  .brand-sub{font-size:0.78rem;color:#C9C0A6;font-style:italic;}
+  .topbar-meta{font-size:0.85rem;color:#B9B195;}
+
+  .hero{
+    max-width:760px;
+    margin:0 auto;
+    padding:56px 24px 20px;
+    text-align:left;
+  }
+  .hero-eyebrow{
+    font-size:0.85rem;
+    color:var(--brass);
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:2.4rem;
+    line-height:1.2;
+    margin:0 0 14px;
+    color:var(--jungle-deep);
+  }
+  .hero p{
+    max-width:60ch;
+    color:#4A473C;
+    font-size:1.02rem;
+    margin:0;
+  }
+
+  form{
+    max-width:760px;
+    margin:32px auto 80px;
+    padding:0 24px;
+  }
+
+  fieldset{
+    border:none;
+    margin:0 0 18px;
+    padding:0;
+  }
+
+  .field-group{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 26px;
+    margin-bottom:16px;
+  }
+
+  .field-group label.group-label{
+    display:block;
+    font-weight:600;
+    font-size:0.98rem;
+    color:var(--jungle-deep);
+    margin-bottom:12px;
+  }
+
+  .required-mark{color:var(--rust);}
+
+  input[type=text], input[type=email], input[type=tel], input[type=date], input[type=file], select, textarea{
+    width:100%;
+    padding:11px 13px;
+    border:1px solid #C9BC96;
+    border-radius:3px;
+    background:#fff;
+    font-family:'Sarabun', sans-serif;
+    font-size:0.98rem;
+    color:var(--ink);
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:none;
+    border-color:var(--jungle);
+    box-shadow:0 0 0 3px rgba(30,59,44,0.12);
+  }
+  input.invalid, select.invalid, textarea.invalid{
+    border-color:var(--rust);
+    box-shadow:0 0 0 3px rgba(139,58,58,0.10);
+  }
+
+  textarea{resize:vertical; min-height:90px;}
+
+  .error-msg{
+    display:none;
+    color:var(--rust);
+    font-size:0.85rem;
+    margin-top:7px;
+  }
+  .error-msg.show{display:block;}
+
+  .checkbox-row, .radio-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 0;
+  }
+  .checkbox-row input, .radio-row input{
+    width:17px;height:17px;accent-color:var(--jungle);cursor:pointer;
+  }
+  .checkbox-row label, .radio-row label{cursor:pointer;font-size:0.96rem;}
+
+  .salary-value{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--brass);
+    font-size:1.1rem;
+  }
+  input[type=range]{
+    width:100%;
+    accent-color:var(--brass);
+    margin-top:10px;
+    cursor:pointer;
+  }
+
+  .agree-box{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .agree-box input{margin-top:3px;width:17px;height:17px;accent-color:var(--jungle);cursor:pointer;}
+
+  .actions{
+    display:flex;
+    gap:12px;
+    margin-top:26px;
+  }
+  button{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1rem;
+    padding:13px 30px;
+    border-radius:3px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.1s ease, background 0.15s ease;
+  }
+  button:active{transform:translateY(1px);}
+  .btn-primary{
+    background:var(--jungle);
+    color:var(--parchment);
+  }
+  .btn-primary:hover{background:var(--jungle-deep);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--jungle-deep);
+    border-color:#C9BC96;
+  }
+  .btn-secondary:hover{background:rgba(0,0,0,0.03);}
+
+  .success-panel{
+    display:none;
+    margin-top:22px;
+    background:#EAF1EA;
+    border:1px solid var(--ok);
+    border-radius:4px;
+    padding:20px 24px;
+    color:#274734;
+  }
+  .success-panel.show{display:block;}
+  .success-panel h3{
+    font-family:'Fraunces', serif;
+    margin:0 0 6px;
+    font-size:1.15rem;
+  }
+
+  .hint{
+    font-size:0.82rem;
+    color:#8A8368;
+    margin-top:6px;
+  }
+
+  @media (max-width:600px){
+    .topbar{padding:14px 20px;}
+    .hero{padding:40px 18px 10px;}
+    .hero h1{font-size:1.8rem;}
+    .field-group{padding:18px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="brand-mark">Wall Maria</span>
+    <span class="brand-sub">แบบฟอร์มลงทะเบียนคณะสำรวจ</span>
+  </div>
+  <div class="topbar-meta">จัดทำโดย ชื่อ นายวิระ วงษ์พล รหัส 66040249131 </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">การสำรวจครั้งใหญ่ · ปี 2569</div>
+  <h1>ลงทะเบียนเข้าร่วมหน่วยสำรวจ<br>ปฏิบัติการสำรวจนอกกำแพง</h1>
+  <p>กรอกข้อมูลด้านล่างให้ครบถ้วนเพื่อสมัครเข้าร่วมหน่วยสำรวจ ทุกช่องที่มีเครื่องหมาย <span class="required-mark">*</span> จำเป็นต้องกรอก ระบบจะตรวจสอบความถูกต้องของข้อมูลก่อนส่งแบบฟอร์ม</p>
+</div>
+
+<form id="expeditionForm" novalidate>
+
+  <div class="field-group">
+    <label class="group-label" for="fullname">ชื่อ-นามสกุล <span class="required-mark">*</span></label>
+    <input type="text" id="fullname" placeholder="เช่น สมชาย ใจดี">
+    <div class="error-msg" id="err-fullname">กรุณากรอกชื่อ-นามสกุล</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="email">อีเมล <span class="required-mark">*</span></label>
+    <input type="email" id="email" placeholder="เช่น test@email.com">
+    <div class="error-msg" id="err-email">กรุณากรอกอีเมลให้ถูกต้อง</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="phone">เบอร์ติดต่อ <span class="required-mark">*</span></label>
+    <input type="tel" id="phone" placeholder="เช่น 0812345678">
+    <div class="hint">รูปแบบ: ตัวเลข 10 หลัก ขึ้นต้นด้วย 0</div>
+    <div class="error-msg" id="err-phone">กรุณากรอกเบอร์โทรศัพท์ 10 หลัก ขึ้นต้นด้วย 0</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="dob">วัน เดือน ปีเกิด <span class="required-mark">*</span></label>
+    <input type="date" id="dob">
+    <div class="hint">ผู้สมัครต้องมีอายุ 18 ปีขึ้นไป ณ วันที่สมัคร</div>
+    <div class="error-msg" id="err-dob">กรุณากรอกวันเกิด และผู้สมัครต้องมีอายุ 18 ปีขึ้นไป</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="experience">ประสบการณ์การต่อสู้กับไททัน</label>
+    <select id="experience">
+      <option value="none">ไม่มีประสบการณ์</option>
+      <option value="amateur">มือสมัครเล่น (ไม่เกิน 1 ปี)</option>
+      <option value="intermediate">ระดับกลาง (1–5 ปี)</option>
+      <option value="professional">มืออาชีพ (มากกว่า 5 ปี)</option>
+    </select>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label">ตำแหน่งในหน่วยสำรวจ (เลือกได้มากกว่า 1) <span class="required-mark">*</span></label>
+    <div class="checkbox-row"><input type="checkbox" id="role-researcher" value="หน่วยข่าวกรอง"><label for="role-researcher">หน่วยข่าวกรอง</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-photographer" value="หน่วยสื่อสาร"><label for="role-photographer">หน่วยสื่อสาร</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-drone" value="ทหารแนวหน้า"><label for="role-drone">ทหารแนวหน้า</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-cartographer" value="หน่วยสำรวจพื้นที่"><label for="role-cartographer">หน่วยสำรวจพื้นที่</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-medic" value="หน่วยแพทย์"><label for="role-medic">หน่วยแพทย์</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-logistician" value="หน่วยสนับสนุน"><label for="role-logistician">หน่วยสนับสนุน</label></div>
+    <div class="error-msg" id="err-role">กรุณาเลือกบทบาทอย่างน้อย 1 รายการ</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label">ภารกิจที่ต้องการเข้าร่วม <span class="required-mark">*</span></label>
+    <div class="radio-row"><input type="radio" name="region" id="region-sa" value="กำแพง Maria"><label for="region-sa">กำแพง Maria</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-af" value="กำแพง Rose"><label for="region-af">กำแพง Rose</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-as" value="กำแพง Sina"><label for="region-as">กำแพง Sina</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-eu" value="พื้นที่นอกกำแพง"><label for="region-eu">พื้นที่นอกกำแพง</label></div>
+    <div class="error-msg" id="err-region">กรุณาเลือกภูมิภาค 1 รายการ</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="salary">เงินเดือนที่ต้องการต่อสัปดาห์ (USD): <span class="salary-value" id="salaryValue">3,500</span></label>
+    <input type="range" id="salary" min="500" max="50000" step="100" value="3500">
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="contactMethod">ช่องทางการติดต่อที่สะดวก <span class="required-mark">*</span></label>
+    <select id="contactMethod">
+      <option value="" disabled selected>-- เลือกช่องทาง --</option>
+      <option value="email">อีเมล</option>
+      <option value="phone">โทรศัพท์</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="telegram">Telegram</option>
+    </select>
+    <div class="error-msg" id="err-contactMethod">กรุณาเลือกช่องทางการติดต่อ</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="passport">อัปโหลดพาสปอร์ต/บัตรประชาชน <span class="required-mark">*</span> (JPG, PNG, PDF)</label>
+    <input type="file" id="passport" accept=".jpg,.jpeg,.png,.pdf">
+    <div class="hint">ขนาดไฟล์ไม่เกิน 5MB</div>
+    <div class="error-msg" id="err-passport">กรุณาอัปโหลดไฟล์ประเภท JPG, PNG หรือ PDF เท่านั้น</div>
+  </div>
+
+  <div class="field-group">
+    <label class="group-label" for="comments">ความคิดเห็นเพิ่มเติม</label>
+    <textarea id="comments" placeholder="ระบุข้อมูลเพิ่มเติม (ถ้ามี)"></textarea>
+  </div>
+
+  <div class="field-group">
+    <div class="agree-box">
+      <input type="checkbox" id="agree">
+      <label for="agree">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการเข้าร่วมการสำรวจ <span class="required-mark">*</span></label>
+    </div>
+    <div class="error-msg" id="err-agree">คุณต้องยอมรับข้อตกลงและเงื่อนไขก่อนส่งแบบฟอร์ม</div>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">ส่งใบสมัคร</button>
+    <button type="button" class="btn-secondary" id="clearBtn">ล้างแบบฟอร์ม</button>
+  </div>
+
+  <div class="success-panel" id="successPanel">
+    <h3>สมัครเข้าร่วมหน่วยสำรวจสำเร็จ</h3>
+    <p>ข้อมูลของคุณถูกส่งไปยังสำนักงานใหญ่แล้ว โปรดรอการคัดเลือกจากผู้บังคับบัญชาหน่วยสำรวจ</p>
+  </div>
+</form>
+
+<script>
+  const salary = document.getElementById('salary');
+  const salaryValue = document.getElementById('salaryValue');
+  salary.addEventListener('input', () => {
+    salaryValue.textContent = Number(salary.value).toLocaleString('th-TH');
+  });
+
+  const form = document.getElementById('expeditionForm');
+  const successPanel = document.getElementById('successPanel');
+
+  function setError(fieldId, isInvalid){
+    const field = document.getElementById(fieldId);
+    const err = document.getElementById('err-' + fieldId);
+    if(field) field.classList.toggle('invalid', isInvalid);
+    if(err) err.classList.toggle('show', isInvalid);
+  }
+
+  function validateFullname(){
+    const val = document.getElementById('fullname').value.trim();
+    const valid = val.length > 0;
+    setError('fullname', !valid);
+    return valid;
+  }
+
+  function validateEmail(){
+    const val = document.getElementById('email').value.trim();
+    // basic email pattern check
+    const emailPattern = /^[^\s@]+@[^\s@]+$/;
+    const valid = val.length > 0 && emailPattern.test(val);
+    setError('email', !valid);
+    return valid;
+  }
+
+  // BUG 2: phone number pattern requires only 8 digits after the leading 0
+  // (9 digits total) even though the hint text says "10 หลัก". Real 10-digit
+  // numbers like 0812345678 will be marked INVALID, while a wrong 9-digit
+  // number like 081234567 will be marked VALID.
+  function validatePhone(){
+    const val = document.getElementById('phone').value.trim();
+    const phonePattern = /^0\d{8}$/; // BUG: should be \d{9} to total 10 digits
+    const valid = phonePattern.test(val);
+    setError('phone', !valid);
+    return valid;
+  }
+
+  // BUG 9: no guard against a future birth date. There is no `max`
+  // attribute on the <input type="date"> element (so the browser's own
+  // calendar picker never blocks a date like 2030-01-01), and the JS below
+  // never explicitly checks `birthDate > today`. It relies entirely on the
+  // year-subtraction falling below the threshold on its own. This is
+  // fragile: in most cases a future year does compute a negative "age" and
+  // correctly fails today's check, but the field offers zero explicit
+  // protection against nonsensical future dates, and edge cases (browser
+  // locale quirks, manual DOM/value manipulation, clock differences) can
+  // let a future date slip through as "valid" since nothing ever asserts
+  // birthDate <= today.
+  function validateDob(){
+    const val = document.getElementById('dob').value;
+    if(!val){
+      setError('dob', true);
+      return false;
+    }
+    const birthDate = new Date(val);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    // BUG 3 (still present): should be age >= 18, not age > 18
+    // BUG 9 (still present): missing `if(birthDate > today) { invalid }` guard
+    const valid = age > 18;
+    setError('dob', !valid);
+    return valid;
+  }
+
+  // BUG 4: selector typo narrows the match to only ids starting with
+  // "role-r" (i.e. only "role-researcher"). Checking any OTHER role box
+  // (photographer, drone/archaeologist, cartographer, medic, logistician)
+  // is invisible to this check, so the field still shows "please select at
+  // least one role" even though a role IS checked.
+  function validateRoles(){
+    const checked = document.querySelectorAll('.field-group input[type=checkbox][id^="role-r"]:checked'); // BUG: extra "r"
+    const valid = checked.length > 0;
+    setError('role', !valid);
+    return valid;
+  }
+
+  // BUG 5: inverted logic. Selecting a region marks the field INVALID, and
+  // leaving it unselected marks it VALID — the exact opposite of what the
+  // required-field indicator (*) promises.
+  function validateRegion(){
+    const checked = document.querySelector('input[name="region"]:checked');
+    const valid = !checked; // BUG: should be !!checked
+    setError('region', !valid);
+    return valid;
+  }
+
+  // BUG 7: only "email" is accepted as a valid contact method. Choosing
+  // "โทรศัพท์" (phone), "WhatsApp" or "Telegram" is wrongly rejected even
+  // though they are legitimate options in the dropdown.
+  function validateContactMethod(){
+    const val = document.getElementById('contactMethod').value;
+    const valid = val === 'email'; // BUG: should be val !== ''
+    setError('contactMethod', !valid);
+    return valid;
+  }
+
+  // --- BUG INJECTED FOR QA TESTING (see explanation in chat) ---
+  // This function is SUPPOSED to require a file and check that its
+  // extension is jpg/jpeg/png/pdf. As written, it only checks that a
+  // file exists, and the extension check is unreachable because the
+  // "valid" variable is assigned before the extension test runs and is
+  // never re-evaluated. Any file type will pass, even .exe or .zip.
+  function validatePassport(){
+    const fileInput = document.getElementById('passport');
+    const hasFile = fileInput.files.length > 0;
+    let valid = hasFile; // BUG: this should also depend on extension check below
+    if(hasFile){
+      const fileName = fileInput.files[0].name.toLowerCase();
+      const allowedExt = ['.jpg', '.jpeg', '.png', '.pdf'];
+      const isAllowed = allowedExt.some(ext => fileName.endsWith(ext));
+      // BUG: result of isAllowed is never used to update `valid`
+    }
+    setError('passport', !valid);
+    return valid;
+  }
+  // --- END BUG ---
+
+  // BUG 6: inverted logic. Ticking "I accept the terms" makes the field
+  // report as INVALID, while leaving it unticked reports VALID. A tester
+  // could accidentally submit the form successfully WITHOUT ever agreeing
+  // to the terms, or get blocked despite agreeing.
+  function validateAgree(){
+    const valid = !document.getElementById('agree').checked; // BUG: missing negation removed correctly, should be `.checked` alone
+    setError('agree', !valid);
+    return valid;
+  }
+
+  document.getElementById('fullname').addEventListener('blur', validateFullname);
+  document.getElementById('email').addEventListener('blur', validateEmail);
+  document.getElementById('phone').addEventListener('blur', validatePhone);
+  document.getElementById('dob').addEventListener('change', validateDob);
+  document.getElementById('contactMethod').addEventListener('change', validateContactMethod);
+  document.getElementById('passport').addEventListener('change', validatePassport);
+  document.getElementById('agree').addEventListener('change', validateAgree);
+  document.querySelectorAll('input[name="region"]').forEach(r => r.addEventListener('change', validateRegion));
+  document.querySelectorAll('.field-group input[id^="role-"]').forEach(r => r.addEventListener('change', validateRoles));
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    successPanel.classList.remove('show');
+
+    const checks = [
+      validateFullname(),
+      validateEmail(),
+      validatePhone(),
+      validateDob(),
+      validateRoles(),
+      validateRegion(),
+      validateContactMethod(),
+      validatePassport(),
+      validateAgree()
+    ];
+
+    const allValid = checks.every(Boolean);
+
+    if(allValid){
+      successPanel.classList.add('show');
+      successPanel.scrollIntoView({behavior:'smooth', block:'center'});
+    } else {
+      const firstInvalid = form.querySelector('.invalid');
+      if(firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  });
+
+  // BUG 8: form.reset() puts the range input back to 3,500, but the visible
+  // label next to it is never refreshed here. If a user drags the salary
+  // slider to e.g. 20,000 and then clicks "ล้างแบบฟอร์ม", the slider handle
+  // snaps back but the displayed number keeps showing the old value (or
+  // whatever it last was) until the user manually touches the slider again.
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    form.reset();
+    // salaryValue.textContent = '3,500';  // BUG: this line was removed
+    document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+    document.querySelectorAll('.error-msg.show').forEach(el => el.classList.remove('show'));
+    successPanel.classList.remove('show');
+  });
+</script>
+
+</body>
+</html>
