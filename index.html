@@ -296,7 +296,7 @@
   </div>
 
   <div class="field-group">
-    <label class="group-label">ภูมิภาคที่ต้องการสำรวจ <span class="required-mark">*</span></label>
+    <label class="group-label">ภูมิภาคที่ต้องการสำรวจ</label>
     <div class="radio-row"><input type="radio" name="region" id="region-sa" value="อเมริกาใต้"><label for="region-sa">อเมริกาใต้</label></div>
     <div class="radio-row"><input type="radio" name="region" id="region-af" value="แอฟริกา"><label for="region-af">แอฟริกา</label></div>
     <div class="radio-row"><input type="radio" name="region" id="region-as" value="เอเชีย"><label for="region-as">เอเชีย</label></div>
@@ -323,9 +323,9 @@
   </div>
 
   <div class="field-group">
-    <label class="group-label" for="passport">อัปโหลดพาสปอร์ต/บัตรประชาชน <span class="required-mark">*</span> (JPG, PNG, PDF)</label>
+    <label class="group-label" for="passport">อัปโหลดพาสปอร์ต/บัตรประชาชน (JPG, PNG, PDF)</label>
     <input type="file" id="passport" accept=".jpg,.jpeg,.png,.pdf">
-    <div class="hint">ขนาดไฟล์ไม่เกิน 5MB</div>
+    <div class="hint">ขนาดไฟล์ไม่เกิน 5MB (ไม่บังคับ)</div>
     <div class="error-msg" id="err-passport">กรุณาอัปโหลดไฟล์ประเภท JPG, PNG หรือ PDF เท่านั้น</div>
   </div>
 
@@ -437,14 +437,10 @@
     return valid;
   }
 
-  // BUG 5: inverted logic. Selecting a region marks the field INVALID, and
-  // leaving it unselected marks it VALID — the exact opposite of what the
-  // required-field indicator (*) promises.
+  // Region is now optional
   function validateRegion(){
-    const checked = document.querySelector('input[name="region"]:checked');
-    const valid = !checked; // BUG: should be !!checked
-    setError('region', !valid);
-    return valid;
+    setError('region', false);
+    return true; // always valid - field is optional
   }
 
   // BUG 7: only "email" is accepted as a valid contact method. Choosing
@@ -466,15 +462,15 @@
   function validatePassport(){
     const fileInput = document.getElementById('passport');
     const hasFile = fileInput.files.length > 0;
-    let valid = hasFile; // BUG: this should also depend on extension check below
-    if(hasFile){
-      const fileName = fileInput.files[0].name.toLowerCase();
-      const allowedExt = ['.jpg', '.jpeg', '.png', '.pdf'];
-      const isAllowed = allowedExt.some(ext => fileName.endsWith(ext));
-      // BUG: result of isAllowed is never used to update `valid`
+    if(!hasFile){
+      setError('passport', false);
+      return true; // no file is ok - field is optional
     }
-    setError('passport', !valid);
-    return valid;
+    const fileName = fileInput.files[0].name.toLowerCase();
+    const allowedExt = ['.jpg', '.jpeg', '.png', '.pdf'];
+    const isAllowed = allowedExt.some(ext => fileName.endsWith(ext));
+    setError('passport', !isAllowed);
+    return isAllowed;
   }
   // --- END BUG ---
 
