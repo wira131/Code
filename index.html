@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ลงทะเบียนการสำรวจนอกกำแพง | Wall Maria</title>
+<title>ลงทะเบียนการสำรวจเมืองเอลโดเรีย | Eldoria Expedition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -234,7 +234,7 @@
 
 <div class="topbar">
   <div class="brand">
-    <span class="brand-mark">Wall Maria</span>
+    <span class="brand-mark">เอลโดเรีย</span>
     <span class="brand-sub">แบบฟอร์มลงทะเบียนคณะสำรวจ</span>
   </div>
   <div class="topbar-meta">จัดทำโดย ชื่อ นายวิระ วงษ์พล รหัส 66040249131 </div>
@@ -242,8 +242,8 @@
 
 <div class="hero">
   <div class="hero-eyebrow">การสำรวจครั้งใหญ่ · ปี 2569</div>
-  <h1>ลงทะเบียนเข้าร่วมหน่วยสำรวจ<br>ปฏิบัติการสำรวจนอกกำแพง</h1>
-  <p>กรอกข้อมูลด้านล่างให้ครบถ้วนเพื่อสมัครเข้าร่วมหน่วยสำรวจ ทุกช่องที่มีเครื่องหมาย <span class="required-mark">*</span> จำเป็นต้องกรอก ระบบจะตรวจสอบความถูกต้องของข้อมูลก่อนส่งแบบฟอร์ม</p>
+  <h1>ลงทะเบียนเข้าร่วมการสำรวจ<br>ค้นหาเมืองเอลโดเรีย</h1>
+  <p>กรอกข้อมูลด้านล่างให้ครบถ้วนเพื่อสมัครเข้าร่วมทีมสำรวจ ทุกช่องที่มีเครื่องหมาย <span class="required-mark">*</span> จำเป็นต้องกรอก ระบบจะตรวจสอบความถูกต้องของข้อมูลก่อนส่งแบบฟอร์ม</p>
 </div>
 
 <form id="expeditionForm" novalidate>
@@ -275,7 +275,7 @@
   </div>
 
   <div class="field-group">
-    <label class="group-label" for="experience">ประสบการณ์การต่อสู้กับไททัน</label>
+    <label class="group-label" for="experience">ประสบการณ์ด้านโบราณคดี</label>
     <select id="experience">
       <option value="none">ไม่มีประสบการณ์</option>
       <option value="amateur">มือสมัครเล่น (ไม่เกิน 1 ปี)</option>
@@ -285,22 +285,23 @@
   </div>
 
   <div class="field-group">
-    <label class="group-label">ตำแหน่งในหน่วยสำรวจ (เลือกได้มากกว่า 1) <span class="required-mark">*</span></label>
-    <div class="checkbox-row"><input type="checkbox" id="role-researcher" value="หน่วยข่าวกรอง"><label for="role-researcher">หน่วยข่าวกรอง</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="role-photographer" value="หน่วยสื่อสาร"><label for="role-photographer">หน่วยสื่อสาร</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="role-drone" value="ทหารแนวหน้า"><label for="role-drone">ทหารแนวหน้า</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="role-cartographer" value="หน่วยสำรวจพื้นที่"><label for="role-cartographer">หน่วยสำรวจพื้นที่</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="role-medic" value="หน่วยแพทย์"><label for="role-medic">หน่วยแพทย์</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="role-logistician" value="หน่วยสนับสนุน"><label for="role-logistician">หน่วยสนับสนุน</label></div>
+    <label class="group-label">บทบาทที่ต้องการในการสำรวจ (เลือกได้มากกว่า 1) <span class="required-mark">*</span></label>
+    <div class="checkbox-row"><input type="checkbox" id="role-researcher" value="นักวิจัย"><label for="role-researcher">นักวิจัย</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-photographer" value="ช่างภาพ"><label for="role-photographer">ช่างภาพ</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-drone" value="นักโบราณคดี"><label for="role-drone">นักโบราณคดี</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-cartographer" value="นักทำแผนที่"><label for="role-cartographer">นักทำแผนที่</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-medic" value="แพทย์ประจำทีม"><label for="role-medic">แพทย์ประจำทีม</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="role-logistician" value="ฝ่ายส่งกำลังบำรุง"><label for="role-logistician">ฝ่ายส่งกำลังบำรุง</label></div>
     <div class="error-msg" id="err-role">กรุณาเลือกบทบาทอย่างน้อย 1 รายการ</div>
   </div>
 
   <div class="field-group">
-    <label class="group-label">ภารกิจที่ต้องการเข้าร่วม <span class="required-mark">*</span></label>
-    <div class="radio-row"><input type="radio" name="region" id="region-sa" value="กำแพง Maria"><label for="region-sa">กำแพง Maria</label></div>
-    <div class="radio-row"><input type="radio" name="region" id="region-af" value="กำแพง Rose"><label for="region-af">กำแพง Rose</label></div>
-    <div class="radio-row"><input type="radio" name="region" id="region-as" value="กำแพง Sina"><label for="region-as">กำแพง Sina</label></div>
-    <div class="radio-row"><input type="radio" name="region" id="region-eu" value="พื้นที่นอกกำแพง"><label for="region-eu">พื้นที่นอกกำแพง</label></div>
+    <label class="group-label">ภูมิภาคที่ต้องการสำรวจ <span class="required-mark">*</span></label>
+    <div class="radio-row"><input type="radio" name="region" id="region-sa" value="อเมริกาใต้"><label for="region-sa">อเมริกาใต้</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-af" value="แอฟริกา"><label for="region-af">แอฟริกา</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-as" value="เอเชีย"><label for="region-as">เอเชีย</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-eu" value="ยุโรป"><label for="region-eu">ยุโรป</label></div>
+    <div class="radio-row"><input type="radio" name="region" id="region-au" value="ออสเตรเลีย"><label for="region-au">ออสเตรเลีย</label></div>
     <div class="error-msg" id="err-region">กรุณาเลือกภูมิภาค 1 รายการ</div>
   </div>
 
@@ -347,8 +348,8 @@
   </div>
 
   <div class="success-panel" id="successPanel">
-    <h3>สมัครเข้าร่วมหน่วยสำรวจสำเร็จ</h3>
-    <p>ข้อมูลของคุณถูกส่งไปยังสำนักงานใหญ่แล้ว โปรดรอการคัดเลือกจากผู้บังคับบัญชาหน่วยสำรวจ</p>
+    <h3>ลงทะเบียนสำเร็จ</h3>
+    <p>ขอบคุณสำหรับการสมัครเข้าร่วมคณะสำรวจเมืองเอลโดเรีย ทีมงานจะติดต่อกลับผ่านช่องทางที่ท่านเลือกไว้</p>
   </div>
 </form>
 
